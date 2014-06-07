@@ -9,8 +9,8 @@ if ($sid=="") {
 $file_db=new PDO('mysql:host=localhost;dbname=ushahidi-v2','root','Divater100!');
 $loginPage=file_get_contents("loginPage.html");
 if (isset($_POST['username']) && isset($_POST['password'])){
-	$username=strtoupper($_POST['username']);
-	$password=strtoupper($_POST['password']);
+	$username=$_POST['username'];
+	$password=$_POST['password'];
 	$hashKey=uniqid("placemaker-".$sid);
 	$result = $file_db->query("SELECT * FROM users where username='{$username}'");
 	$noResult=true;
