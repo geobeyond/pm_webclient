@@ -3,7 +3,7 @@
 $fid=$_GET['fid'];
 if ($_POST['fid']!='') $fid=$_POST['fid'];
 
-$db=new PDO('mysql:host=localhost;dbname=ushahidi-v2','root','Divater100!');
+$db=new PDO('mysql:host=localhost;dbname=ushahidi_v2','root','Divater100!');
 
 $result = $db->query("SELECT name, path FROM phase1_img where fk_feature='{$fid}'");
 $noResult=true;

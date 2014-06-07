@@ -6,7 +6,7 @@ if ($sid=="") {
 }
 
 //$file_db = new PDO('sqlite:users.db');
-$file_db=new PDO('mysql:host=localhost;dbname=ushahidi-v2','root','Divater100!');
+$file_db=new PDO('mysql:host=localhost;dbname=ushahidi_v2','root','Divater100!');
 $loginPage=file_get_contents("loginPage.html");
 if (isset($_POST['username']) && isset($_POST['password'])){
 	$username=$_POST['username'];

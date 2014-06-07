@@ -1079,7 +1079,7 @@ class UploadHandler
                 	$path="videos/".$_GET['fid'];
                 }
                 $path.="/".$file->name;
-                $db=new PDO('mysql:host=localhost;dbname=ushahidi-v2','root','Divater100!');
+                $db=new PDO('mysql:host=localhost;dbname=ushahidi_v2','root','Divater100!');
                 $insertQuery="insert into phase1_img (name, path,fk_feature) values (?,?,?)";
                 $stmt=$db->prepare($insertQuery);
                 $stmt->bindParam(1, $file->name);
