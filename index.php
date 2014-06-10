@@ -6,11 +6,11 @@ if ($sid=="") {
 }
 
 //$file_db = new PDO('sqlite:users.db');
-$file_db=new PDO('mysql:host=localhost;dbname=ushahidi_v2','root','Divater100!');
+$file_db=new PDO('mysql:host=sql.geovolution.it;dbname=geovolut37572','geovolut37572','jack76');
 $loginPage=file_get_contents("loginPage.html");
 if (isset($_POST['username']) && isset($_POST['password'])){
-	$username=$_POST['username'];
-	$password=$_POST['password'];
+	$username=strtoupper($_POST['username']);
+	$password=strtoupper($_POST['password']);
 	$hashKey=uniqid("placemaker-".$sid);
 	$result = $file_db->query("SELECT * FROM users where username='{$username}'");
 	$noResult=true;
@@ -25,11 +25,11 @@ if (isset($_POST['username']) && isset($_POST['password'])){
 			setcookie("hashKey",$hashKey);
 			setcookie("username",$username);
 			header("location: index.php");
-		}else {
+		} else {
 			$loginPage=str_replace("<!--message-->", "<span class=\"warning\" style=\"color:red\">Username/password error</span>", $loginPage);
 			die($loginPage);
 		}
-	}else {
+	} else {
 		$loginPage=str_replace("<!--message-->", "<span class=\"warning\" style=\"color:red\">Username not found</span>", $loginPage);
 		die($loginPage);
 	}

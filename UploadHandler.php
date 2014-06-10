@@ -142,8 +142,8 @@ class UploadHandler
                     // Uncomment the following to force the max
                     // dimensions and e.g. create square thumbnails:
                     //'crop' => true,
-                    'max_width' => 80,
-                    'max_height' => 80
+                    'max_width' => 150,
+                    'max_height' => 150
                 )
             )
         );
@@ -1079,7 +1079,7 @@ class UploadHandler
                 	$path="videos/".$_GET['fid'];
                 }
                 $path.="/".$file->name;
-                $db=new PDO('mysql:host=localhost;dbname=ushahidi_v2','root','Divater100!');
+                $db=new PDO('mysql:host=sql.geovolution.it;dbname=geovolut37572','geovolut37572','jack76');
                 $insertQuery="insert into phase1_img (name, path,fk_feature) values (?,?,?)";
                 $stmt=$db->prepare($insertQuery);
                 $stmt->bindParam(1, $file->name);

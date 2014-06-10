@@ -46,19 +46,31 @@ mi=this;
         Ext.apply(me, {
             layout: 'border',
 			items: [
-			{
+				{
                 region: 'center',
-				xtype: 'pm_mappanel',
-				margin: '35 0 5 5',
+				xtype: 'panel',
+				layout: 'border',
+				margin: '5 0 5 5',
+				items:[{region: 'center',
+						xtype: 'pm_mappanel'
+						},
+						{	
+						region: 'south',
+						xtype: 'panel',
+						id: 'featInfo',
+						title: 'Feature Report',
+						collapsible: true,
+						collapsed: true
+						}]
                 },
-			{
+				{
 				region: 'west',
 				xtype: 'panel',
 				title: 'Fasi',
 				width: 250,
 				minWidth: 175,
 				collapsible: true,
-				margin: '35 0 5 5',
+				margin: '5 0 5 5',
 				layout: {
 					type: 'accordion',
 					animate: true
@@ -72,19 +84,7 @@ mi=this;
 						{xtype:'panelFase7'},
 						{xtype:'panelFase8'},
 						]
-				},
-			{	
-				region: 'east',
-				xtype: 'panel',
-				id: 'featInfo',
-				title: 'Feature Report',
-				width: 250,
-				minWidth: 175,
-				collapsible: true,
-				collapsed: true,
-				margin: '35 0 5 5'
-			}]
-            
+				}]
         });
         me.callParent(arguments);
     }

@@ -3,3 +3,23 @@
  * redirect to the most recently built css file for the application to
  * support development time inspection of css output.
  */
+.img_slider{
+	
+}
+
+.img_slider li{
+	display: inline-block;
+    height: 160px;
+    list-style: none outside none;
+    white-space: nowrap;
+    text-align:center;
+}
+
+.img_slider a, .img_slider a:visited, .img_slider a:hoover, .img_slider a:active{
+	text-decoration:none
+	
+}
+
+.separator{
+	
+}

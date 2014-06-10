@@ -64,65 +64,11 @@ var actionSubmit;
 function drawButtons(){
 	if (buttonsDrawed) return;
 	buttonsDrawed=true;
-	//buttonsNavSelFieldset=Ext.getCmp('fase1-nav-sel-buttons');
-	//buttonsDelSendFieldset=Ext.getCmp('fase1-send-delete-buttons');
 	buttonsDrawFieldset=Ext.getCmp('fase1-draw-buttons');
 	map.addControl(new OpenLayers.Control.LayerSwitcher({
 		'div':OpenLayers.Util.getElement('layers-div')
 	}));
-	/*
-	actionDrawPoly = Ext.create('GeoExt.Action', {
-        text: "<i class=\"fa fa-square-o\"></i> poly",
-        control: new OpenLayers.Control.DrawFeature(vector, OpenLayers.Handler.Polygon),
-        id: 'fase1-button-poly',
-        map: map,
-        toggleGroup: "draw",
-        allowDepress: true,
-        tooltip: "polygon",
-        group: "draw"
-    });
-	
-	actionDrawPoint = Ext.create('GeoExt.Action', {
-        text: "<i class=\"fa fa-map-marker\"></i> point",
-        control: new OpenLayers.Control.DrawFeature(vector, OpenLayers.Handler.Point),
-        id: 'fase1-button-point',
-        map: map,
-        toggleGroup: "draw",
-        allowDepress: true,
-        tooltip: "draw point",
-        group: "draw"
-    });
-	
-	actionDrawLine = Ext.create('GeoExt.Action', {
-        text: "<i class=\"fa fa-angle-left \"></i> line",
-        control: new OpenLayers.Control.DrawFeature(vector, OpenLayers.Handler.Path),
-        id: 'fase1-button-line',
-        map: map,
-        toggleGroup: "draw",
-        allowDepress: true,
-        tooltip: "draw line",
-        group: "draw"
-    });
-   
-	
-
-	 
-	//buttonsNavSelFieldset.add(Ext.create('Ext.button.Button', actionMaxExtent));
-	//buttonsNavSelFieldset.add(Ext.create('Ext.button.Button', actionNav));
-    buttonsDrawFieldset.add(Ext.create('Ext.button.Button', actionDrawPoint));
-    buttonsDrawFieldset.add(Ext.create('Ext.button.Button', actionDrawLine));
-    buttonsDrawFieldset.add(Ext.create('Ext.button.Button', actionDrawPoly));
-    //buttonsNavSelFieldset.add(Ext.create('Ext.button.Button', actionSelect));
-    //buttonsNavSelFieldset.add(Ext.create('Ext.button.Button', actionDelete));
-    
-*/
-	
-    
 }
-
-
-
-
 
 function formTypeSelect(){
 	if (Ext.getCmp('fase1-form-type-selection-Window')){
