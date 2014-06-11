@@ -52,6 +52,12 @@ function saveFeature(f){
 							}
 						,{
 							xtype:'textfield',
+							id: 'text',
+							name: 'text',
+							fieldLabel: 'Testo'
+							}
+						,{
+							xtype:'textfield',
 							id: 'maplabel',
 							name: 'maplabel',
 							fieldLabel: 'Label'
@@ -125,6 +131,10 @@ function saveFeature(f){
 	                   if (items[i].name=='link') {
 	                	   feature.attributes.link=items[i].getValue();
 	    		           feature.data.link=items[i].getValue();
+	                   }
+	                   if (items[i].name=='text') {
+	                	   feature.attributes.text=items[i].getValue();
+	    		           feature.data.text=items[i].getValue();
 	                   }
 		           }
 		           
@@ -262,6 +272,13 @@ function modSelectedFeature(fid){
 							}
 						,{
 							xtype:'textfield',
+							id: 'text',
+							name: 'text',
+							fieldLabel: 'Testo',
+							value: sf.data.text
+							}
+						,{
+							xtype:'textfield',
 							id: 'maplabel',
 							name: 'maplabel',
 							fieldLabel: 'Label',
@@ -335,6 +352,10 @@ function modSelectedFeature(fid){
 	                	   sf.attributes.link=items[i].getValue();
 	                	   sf.data.link=items[i].getValue();
 	                   }
+	                   if (items[i].name=='text') {
+	                	   sf.attributes.text=items[i].getValue();
+	                	   sf.data.text=items[i].getValue();
+	                   }
 		           }
 	               sf.state=OpenLayers.State.UPDATE;
 		           saveStrategy.save();
@@ -368,7 +389,7 @@ function riempiDiv1(feat){
 	var divMapLabel="    "+attr.maplabel+"</h1>";
 	var divDescr="<div style='border: 1px solid gray; padding: 10px'>"+attr.description+"</div>";
 	var divTitle="<h1>"+attr.title+"</h1>";
-	var divText="<div style='border: 1px solid gray; padding: 10px'>"+attr.link+"</div>";
+	var divText="<div style='border: 1px solid gray; padding: 10px'>"+attr.text+"</div>";
 	var divHtml=divIcon+divMapLabel+divDescr+divTitle+divText+mod;
 	return divHtml;
 }
@@ -480,9 +501,7 @@ function riempiDiv2(feat){
 }
 
 function gestSelected(feature){
-	if (Ext.getCmp('featInfo').collapsed=="bottom") {
-		Ext.getCmp("featInfo").expand();
-	}
+	if (Ext.getCmp('featInfo').items.items[0]!=undefined) Ext.getCmp('featInfo').items.items[0].destroy();
 	var item={
 			id: 'fid-panel-'+feature.fid,
 			xtype: 'panel',
@@ -528,7 +547,7 @@ function addLayerToMap(layer, map){
 var layerStore;
 var map;
 var saveStrategy = new OpenLayers.Strategy.Save();
-
+var infoBtn;
 
 function layerAddedEvent(layer){
 	layersLoaded[layer.name]=true;
@@ -761,6 +780,20 @@ Ext.define('PM.view.Map', {
 	     
 	     
 	     toolbarItems.push(Ext.create('Ext.button.Button', actionSelect));
+	     
+	     infoBtn=Ext.create('Ext.Button', {
+			    text: '<i class="fa fa-info"> </i> Open info panel',
+			    renderTo: Ext.getBody(),
+			    handler: function() {
+			    	fs=false;
+			    	for (var f in selectedFeatures) fs=true;
+			    	if (fs) {
+			    		if (Ext.getCmp("featInfo").collapsed) Ext.getCmp("featInfo").expand();
+			    		else Ext.getCmp("featInfo").collapse();
+			    	}else alert('Nessuna feature selezionata');
+			    }
+	     });
+	     toolbarItems.push(infoBtn);
 	     toolbarItems.push("-");
 	     
 	     
@@ -859,3 +892,4 @@ Ext.define('PM.view.Map', {
         
     }
 });
+
