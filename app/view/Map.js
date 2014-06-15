@@ -43,7 +43,7 @@ function saveFeature(f){
 						xtype:'textfield',
 						id: 'name',
 						name: 'name',
-						fieldLabel: 'Name'
+						fieldLabel: 'Nome'
 						},{
 							xtype:'textfield',
 							id: 'description',
@@ -65,17 +65,17 @@ function saveFeature(f){
 							xtype:'textfield',
 							id: 'style',
 							name: 'style',
-							fieldLabel: 'style'
+							fieldLabel: 'Stile'
 						},{
 							xtype:'textfield',
 							id: 'symbol_size',
 							name: 'symbol_size',
-							fieldLabel: 'Symbol Size'
+							fieldLabel: 'Grandezza Simbolo'
 						},{
 							xtype:'textfield',
 							id: 'title',
 							name: 'title',
-							fieldLabel: 'Title'
+							fieldLabel: 'Titolo'
 						},{
 							xtype:'textfield',
 							id: 'link',
@@ -230,16 +230,10 @@ function clearSelectedFeatures(){
 
 function gestDeSelected(feature){
 	if (Ext.getCmp("fid-panel-"+feature.fid)) Ext.getCmp("fid-panel-"+feature.fid).destroy();
-	for (var f in selectedFeatures){
-		if (f==feature.name){
-			delete selectedFeature[f];
-		}
-	}
+	selectedFeatures=new Object();
 }
 
 function modSelectedFeature(fid){
-	console.log(fid);
-	console.log(selectedFeatures);
 	for (var fName in selectedFeatures){
 		if (selectedFeatures[fName].fid==fid) sf=selectedFeatures[fName];
 	}
@@ -261,7 +255,7 @@ function modSelectedFeature(fid){
 						xtype:'textfield',
 						id: 'name',
 						name: 'name',
-						fieldLabel: 'Name',
+						fieldLabel: 'Nome',
 						value: sf.data.name
 						},{
 							xtype:'textfield',
@@ -287,19 +281,19 @@ function modSelectedFeature(fid){
 							xtype:'textfield',
 							id: 'style',
 							name: 'style',
-							fieldLabel: 'style',
+							fieldLabel: 'Stile',
 							value: sf.data.style
 						},{
 							xtype:'textfield',
 							id: 'symbol_size',
 							name: 'symbol_size',
-							fieldLabel: 'Symbol Size',
+							fieldLabel: 'Grandezza Simbolo',
 							value: sf.data.symbol_size
 						},{
 							xtype:'textfield',
 							id: 'title',
 							name: 'title',
-							fieldLabel: 'Title',
+							fieldLabel: 'Titolo',
 							value: sf.data.title
 						},{
 							xtype:'textfield',
@@ -359,7 +353,7 @@ function modSelectedFeature(fid){
 		           }
 	               sf.state=OpenLayers.State.UPDATE;
 		           saveStrategy.save();
-		           pmLayer.redraw(true) ;
+		           pmLayer.redraw(true);
 	               Ext.getCmp('map-form-selected-window').hide();
 	               Ext.getCmp('map-form-selected-window').destroy();
 	               if (Ext.getCmp("fid-panel-"+sf.fid)) Ext.getCmp("fid-panel-"+sf.fid).destroy();
@@ -382,7 +376,7 @@ function modSelectedFeature(fid){
 function riempiDiv1(feat){
 	var attr=feat.data;
 	var mod="" +
-			"<a href='#' onclick=\"modSelectedFeature('"+feat.fid+"'); return false;\"><i class='fa fa-pencil'> </i> Modifica</a>" +
+			"<a href='#' style='text-decoration:none;color:black;padding:5 5 5 5' onclick=\"modSelectedFeature('"+feat.fid+"'); return false;\"><i class='fa fa-pencil'> </i> Modifica</a>" +
 					"&nbsp;" +
 					"<a href='#' onclick=\"deleteFeature('"+feat.fid+"'); return false;\"><i class='fa fa-trash-o'> </i> Elimina</a>";
 	var divIcon="<h1><img src='http://www.montagna.tv/cms/wp-content/themes/montagnatv/styles/montagnatv/PDF_icon.png'>";
@@ -390,7 +384,7 @@ function riempiDiv1(feat){
 	var divDescr="<div style='border: 1px solid gray; padding: 10px'>"+attr.description+"</div>";
 	var divTitle="<h1>"+attr.title+"</h1>";
 	var divText="<div style='border: 1px solid gray; padding: 10px'>"+attr.text+"</div>";
-	var divHtml=divIcon+divMapLabel+divDescr+divTitle+divText+mod;
+	var divHtml=divIcon+divMapLabel+divDescr+divTitle+divText+"<br>"+mod;
 	return divHtml;
 }
 
@@ -669,7 +663,7 @@ Ext.define('PM.view.Map', {
 		 
 		wfs = new OpenLayers.Layer.Vector("Selectable", {
 		        strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy],
-		        styleMap: sm,
+		        //styleMap: sm,
 		        projection: new OpenLayers.Projection("EPSG:4326"),
 		        protocol: wfsProtocol
 		    });
@@ -689,7 +683,7 @@ Ext.define('PM.view.Map', {
 		addLayerToMap(ghyb, map);
 		addLayerToMap(gsat, map);
 		addLayerToMap(vector, map);
-		addLayerToMap(pmLayer, map);
+		//addLayerToMap(pmLayer, map);
 		addLayerToMap(wfs, map);
 		map.addControl(new OpenLayers.Control.MousePosition());
 		
@@ -892,4 +886,3 @@ Ext.define('PM.view.Map', {
         
     }
 });
-

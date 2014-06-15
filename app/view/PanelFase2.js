@@ -6,7 +6,18 @@ Ext.define('PM.view.PanelFase2', {
     requires: [],
 	title: 'Fase 2',
 	width: 200,
-	id: 'fase2-report-buttons'
+	id: 'fase2-report-buttons',
+	listeners:{
+		'expand': function(){
+			console.log("expand");
+			addLayerToMap(pmLayer, map);
+		},
+		'collapse': function(){
+			console.log("collapse");
+			map.removeLayer(pmLayer);
+		}
+		
+	}
 	});
 
 
@@ -275,27 +286,12 @@ function showSelectedForm(formId){
 	
 }
 
-function saveGeometries(){
-	addLayerToMap(wfs, map);
-	for (var f in selectedFeatures) {
-		feature=selectedFeatures[f];
-		feature.attributes.title="";
-		feature.data.title="";
-		feature.attributes.incident=layer_fk;
-		feature.data.incident=layer_fk;
-		feature.state=OpenLayers.State.INSERT;
-		wfs.addFeatures([feature]);
-	}
-	saveStrategy.save();
-	setTimeout("map.removeLayer(wfs);",500);
-}
-
 var layer_fk='';
 
 function buildCustomForm(formId, fieldsetId){
 	 layer_fk='';
 	 for (var f in selectedFeatures) {
-		 layer_fk+=selectedFeatures[f].fid+",";
+		 layer_fk=selectedFeatures[f].fid;
 	 }
 	 Ext.Ajax.request({
 		    url: 'proxy.php?url=http://89.31.77.165/ushahidi-v2/api',
@@ -410,3 +406,4 @@ function buildCustomForm(formId, fieldsetId){
 		    }
 		});
 }
+
